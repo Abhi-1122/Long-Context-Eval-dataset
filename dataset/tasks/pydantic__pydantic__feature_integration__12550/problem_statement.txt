@@ -1,0 +1,28 @@
+Validate JSON model data by iteration
+
+## Change Summary
+
+Imported from https://github.com/pydantic/pydantic-core/pull/1620
+
+The idea here is that JSON data doesn't need to use map lookup, we can instead iterate through the found data. I build a lookup tree which handles this.
+
+## Related issue number
+
+This is going to be necessary for the "iteration" validation in #10032 
+
+## Checklist
+
+* [ ] The pull request title is a good summary of the changes - it will be used in the changelog
+* [ ] Unit tests for the changes exist
+* [ ] Tests pass on CI
+* [ ] Documentation reflects the changes where applicable
+* [ ] My PR is ready to review, **please add a comment including the phrase "please review" to assign reviewers**
+
+Files likely relevant:
+- pydantic-core/src/input/input_abstract.rs
+- pydantic-core/src/input/input_json.rs
+- pydantic-core/src/lookup_key.rs
+- pydantic-core/src/validators/mod.rs
+- pydantic-core/src/validators/model_fields.rs
+- pydantic-core/src/validators/shared/lookup_tree.rs
+- pydantic-core/src/validators/shared/mod.rs

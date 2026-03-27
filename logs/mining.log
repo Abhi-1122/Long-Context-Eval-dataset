@@ -1,0 +1,51 @@
+❯ python3 mine_tasks.py
+/home/abhishekg/Documents/Long-Context-Eval-dataset/mine_tasks.py:237: DeprecationWarning: Argument login_or_token is deprecated, please use auth=github.Auth.Token(...) instead
+  g = Github(token)
+Authenticated: Abhi-1122
+Rate limit: 4979/5000
+
+Mining pallets/flask
+  ✓ PR #5928 | src=3 hops=3 score=15.79 | all teardown callbacks are called despite errors
+  ✓ PR #5818 | src=3 hops=3 score=15.2 | pass context through dispatch methods
+
+Mining tiangolo/fastapi
+Following Github server redirection from /repos/tiangolo/fastapi to /repositories/160919119
+
+Mining psf/requests
+
+Mining encode/httpx
+  ✓ PR #3394 | src=7 hops=21 score=29.48 | Graceful upgrade path for 0.28.
+  ✓ PR #3335 | src=5 hops=10 score=26.99 | Drop overloaded usage of 'verify' and 'cert'.
+
+Mining sqlalchemy/sqlalchemy
+
+Mining pydantic/pydantic
+  ✓ PR #10678 | src=8 hops=28 score=28.0 | Support default factories taking validated data as an a
+  ✓ PR #12636 | src=5 hops=10 score=24.44 | Add minimal support for Python 3.14
+  ✓ PR #12752 | src=4 hops=3 score=18.03 | Migrate `pydantic-core` CI
+  ✓ PR #11883 | src=5 hops=10 score=29.09 | Add experimental `MISSING` sentinel
+  ✓ PR #12677 | src=12 hops=66 score=29.33 | Fix serialization of typed dict unions when `exclude_no
+  ✓ PR #12550 | src=7 hops=21 score=30.7 | Validate JSON model data by iteration
+  ✓ PR #12660 | src=8 hops=28 score=27.44 | Do not eagerly evaluate annotations in signature logic
+
+Mining celery/celery
+  ✓ PR #10190 | src=4 hops=6 score=23.37 | Fix#9722 friendly status errors for CLI
+  ✓ PR #10189 | src=3 hops=3 score=15.22 | Extract `reconnect_on_error` to `BaseResultConsumer`
+  ✓ PR #9986 | src=4 hops=6 score=23.4 | Fix: Broker heartbeats not sent during graceful shutdow
+  ✓ PR #9678 | src=3 hops=3 score=15.87 | Don't fail task on timeout during cold shutdown
+
+Mining aio-libs/aiohttp
+
+Mining django/django
+  ✓ PR #20587 | src=10 hops=21 score=26.37 | Fixed #36795 -- Enforced quoting of all database object
+
+Mining pytest-dev/pytest
+                                                                Top 2 Task Candidates                                                                
+┏━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━┳━━━━━━━━┳━━━━━━━━━━━━┳━━━━━━━━━━━┳━━━━━━┳━━━━━━━━━┳━━━━━━━┳━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━┓
+┃ Instance ID                                    ┃ PR     ┃ Difficulty ┃ Src Files ┃ Hops ┃ ~Tokens ┃ Score ┃ Title                                 ┃
+┡━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━╇━━━━━━━━╇━━━━━━━━━━━━╇━━━━━━━━━━━╇━━━━━━╇━━━━━━━━━╇━━━━━━━╇━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━┩
+│ pydantic__pydantic__feature_integration__12550 │ #12550 │ hard       │         7 │   21 │  11,970 │ 30.7  │ Validate JSON model data by iteration │
+│ encode__httpx__bug_fix__3394                   │ #3394  │ hard       │         7 │   21 │   8,835 │ 29.48 │ Graceful upgrade path for 0.28.       │
+└────────────────────────────────────────────────┴────────┴────────────┴───────────┴──────┴─────────┴───────┴───────────────────────────────────────┘
+✓ Written 2 tasks to dataset/mined_tasks.jsonl
+Next: run validate_tasks.py
