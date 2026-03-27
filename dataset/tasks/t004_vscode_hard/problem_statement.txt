@@ -1,0 +1,41 @@
+Bug: vscode.workspace.applyEdit() fails to resolve WorkspaceEdit targeting
+     notebook cell metadata when the notebook is open in a split editor group
+
+When a notebook is opened in a split editor (two editor groups, same notebook
+URI), calling the proposed API vscode.workspace.applyEdit() with a
+WorkspaceEdit that targets cell metadata silently fails or applies to the
+wrong cell.
+
+Root cause trace:
+  1. extHostWorkspace.ts: applyEdit() serializes the WorkspaceEdit and sends
+     it to the main thread via IPC (_proxy.$applyWorkspaceEdit).
+
+  2. mainThreadNotebook.ts: The main thread receives the edit and dispatches
+     it through the notebook editor service to resolve the target cell URI.
+
+  3. notebookEditorServiceImpl.ts: getNotebookEditor() looks up the active
+     editor by URI, but when a notebook is in a split group, it uses
+     editorGroupsService.activeGroup.activeEditorPane, which reflects only
+     the LAST focused group — not the group where the notebook URI resides.
+
+  4. The cell URI resolver in extHostNotebook.ts builds cell URIs as:
+       vscode-notebook-cell://<notebookUri>#<cellHandle>
+     But the stale tab state from editorGroupsService returns cellHandle
+     indices from the wrong group's cached tab order, causing the wrong
+     cell (or no cell) to be targeted.
+
+  5. extHostTypes.ts WorkspaceEdit: the notebook cell metadata edit entry
+     does not carry group ID information, so there is no way for the main
+     thread to disambiguate which group's cell array to use.
+
+Expected: applyEdit() should resolve cell URIs against the notebook document's
+live cell array (from the NotebookDocument model), not the editor group's
+cached tab state.
+
+Files to investigate:
+- src/vs/workbench/api/common/extHostNotebook.ts
+- src/vs/workbench/api/common/extHostWorkspace.ts
+- src/vs/workbench/contrib/notebook/browser/notebookEditorServiceImpl.ts
+- src/vs/workbench/services/editor/common/editorGroupsService.ts
+- src/vs/workbench/api/browser/mainThreadNotebook.ts
+- src/vs/workbench/api/common/extHostTypes.ts

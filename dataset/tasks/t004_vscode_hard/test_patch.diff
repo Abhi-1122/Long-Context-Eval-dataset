@@ -1,0 +1,14 @@
+--- a/src/vs/workbench/test/browser/parts/editor/notebookEditorWorkspaceEdit.test.ts
++++ b/src/vs/workbench/test/browser/parts/editor/notebookEditorWorkspaceEdit.test.ts
+@@ -1,3 +1,33 @@
++test('applyCellMetadataEdit_splitEditor_resolvesCorrectly', async () => {
++    // placeholder for split editor notebook metadata applyEdit regression test
++});
++
++test('applyCellMetadataEdit_staleCacheInvalidatedOnTabChange', async () => {
++    // placeholder for stale cache invalidation regression test
++});
++
++test('applyCellMetadataEdit_singleEditor_works', async () => {
++    // existing behavior guard
++});

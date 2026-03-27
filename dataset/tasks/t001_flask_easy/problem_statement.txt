@@ -1,0 +1,24 @@
+Bug: send_file() ignores max_age when conditional=True
+
+When calling flask.send_file() with both conditional=True and a max_age value,
+the Cache-Control: max-age header is never set on the response. This is because
+the conditional response path in helpers.py returns early after calling
+make_conditional(), before the max_age assignment is applied.
+
+Steps to reproduce:
+    from flask import Flask, send_file
+    app = Flask(__name__)
+
+    @app.route("/file")
+    def download():
+        return send_file("test.txt", conditional=True, max_age=3600)
+
+    # Response headers:
+    # Cache-Control: no-cache          ← WRONG, max-age=3600 expected
+
+Expected: Cache-Control: max-age=3600 should be present when max_age is
+explicitly provided, regardless of the conditional flag.
+
+Files likely relevant:
+- src/flask/helpers.py (send_file implementation)
+- src/flask/wrappers.py (Response class, make_conditional)
